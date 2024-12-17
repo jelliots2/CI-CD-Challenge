@@ -1,28 +1,38 @@
-name: Deploy on Merge
+name: Deploy On Merge
 
 on:
   push:
+    branches: [main]
+  pull_request:
     branches:
       - main
 
 jobs:
-  deploy:
+  ci:
+    name: Deploy To Render
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build project
-      run: npm run build
+      - name: Test
+        run: npm run test
 
-    - name: Deploy to Render
-      run: curl -X POST 'https://api.render.com/deploy/srv-ctc965m8ii6s73cfofhg?key=kORhYsNBy_4'
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy
+        # Only run this step if the branch is main
+        if: github.ref == 'refs/heads/main'
+        env:
+          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: curl "$deploy_url"
