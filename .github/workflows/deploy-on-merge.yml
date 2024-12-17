@@ -25,11 +25,4 @@ jobs:
       run: npm run build
 
     - name: Deploy to Render
-      env:
-        RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
-      run: |
-        curl -X POST \
-          -H "Authorization: Bearer $RENDER_API_KEY" \
-          -H "Content-Type: application/json" \
-          --data '{"serviceId": "your-service-id", "branch": "main"}' \
-          https://api.render.com/v1/services/your-service-id/deploys
+      run: curl -X POST 'https://api.render.com/deploy/srv-ctc965m8ii6s73cfofhg?key=kORhYsNBy_4'
