@@ -7,27 +7,28 @@ on:
 
 jobs:
   test:
+    name: Checking Tests
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21.x'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Start server
-      run: npm start &
-      env:
-        CI: true
+      - name: Start server
+        run: npm start &
+        env:
+          CI: true
 
-    - name: Wait for server to be ready
-      run: sleep 10
+      - name: Wait for server to be ready
+        run: sleep 10
 
-    - name: Run tests
-      run: npm test
+      - name: Run tests
+        run: npm run test
