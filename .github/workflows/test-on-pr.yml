@@ -23,7 +23,7 @@ jobs:
         run: npm install
 
       - name: Start server
-        run: npm start &
+        run: PORT=3001 npm start &
         env:
           CI: true
 
