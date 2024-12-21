@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - develop
-      - staging
 
 jobs:
   test:
@@ -28,7 +27,7 @@ jobs:
           CI: true
 
       - name: Wait for server to be ready
-        run: sleep 10
+        run: npx wait-on http://localhost:3001
 
-      - name: Run vitest tests
+      - name: Run Cypress tests
         run: npm run test
