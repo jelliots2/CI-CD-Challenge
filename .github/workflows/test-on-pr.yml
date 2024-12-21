@@ -21,5 +21,13 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Start server
+      run: npm start &
+      env:
+        CI: true
+
+    - name: Wait for server to be ready
+      run: sleep 10
+
     - name: Run tests
       run: npm test
