@@ -22,12 +22,9 @@ jobs:
         run: npm install
 
       - name: Start server
-        run: PORT=3001 npm start &
+        run: npm start &
         env:
           CI: true
-
-      - name: Wait for server to be ready
-        run: npx wait-on http://localhost:3001
 
       - name: Run Cypress Component tests
         run: npm run test-component
