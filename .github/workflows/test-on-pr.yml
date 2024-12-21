@@ -21,6 +21,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+<<<<<<< HEAD
+=======
     - name: Start server
       run: npm start &
       env:
@@ -29,5 +31,6 @@ jobs:
     - name: Wait for server to be ready
       run: sleep 10
 
+>>>>>>> main
     - name: Run tests
       run: npm test
